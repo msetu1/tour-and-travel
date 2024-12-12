@@ -41,6 +41,9 @@ const userSchema = new Schema<IUser>({
     },
     required: [true, 'User status is required'],
   },
+},
+{
+  timestamps:true,
 });
 
 // pre and post hooks

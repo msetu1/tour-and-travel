@@ -11,6 +11,7 @@ export interface ITour{
     startLocation:string;
     location:string[];
     slug:string[];
+    availableSeats:number
 }
 
 export interface ITourMethods{
