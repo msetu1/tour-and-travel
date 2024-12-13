@@ -8,6 +8,7 @@ import { handleGenericError } from '../helpers/handleGenericError';
 import { handleDuplicateError } from '../helpers/handleDuplicateError';
 import { handleValidationError } from '../helpers/handleValidationError';
 import { handleCastError } from '../helpers/handleCastError';
+import { handleZodError } from '../helpers/handleZodError';
 
 const globalErrorHandler = (
   err: any,
@@ -15,23 +16,27 @@ const globalErrorHandler = (
   res: Response,
   next: NextFunction,
 ) => {
-  if (err instanceof mongoose.Error.CastError) {
-    handleCastError(err,res)
+  if (err.name && err.name === 'ZodError') {
+    handleZodError(err, res);
+  } 
+  // mongoose error
+  else if (err instanceof mongoose.Error.CastError) {
+    handleCastError(err, res);
   }
 
   // validate error
   else if (err instanceof mongoose.Error.ValidationError) {
-    handleValidationError(err,res)
+    handleValidationError(err, res);
   }
 
   // duplicate error
   else if (err.code && err.code === 11000) {
-    handleDuplicateError(err,res);
+    handleDuplicateError(err, res);
   }
-  
-  // generic error 
+
+  // generic error
   else if (err instanceof Error) {
-    handleGenericError(err,res);
+    handleGenericError(err, res);
   }
 };
 
