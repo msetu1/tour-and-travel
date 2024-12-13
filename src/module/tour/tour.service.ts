@@ -14,33 +14,32 @@ const allTour = async () => {
 };
 
 // single tour
-const singleTour = async (id:string) => {
+const singleTour = async (id: string) => {
   const result = await Tour.findById(id);
   return result;
 };
 
 // update tour
-const updateTour = async (id:string, data: ITour) => {
-  const result = await Tour.findByIdAndUpdate(id,data,{new:true});
+const updateTour = async (id: string, data: ITour) => {
+  const result = await Tour.findByIdAndUpdate(id, data, { new: true });
   return result;
 };
 
 // delete tour
-const deleteTour = async (id:string) => {
+const deleteTour = async (id: string) => {
   const result = await Tour.findByIdAndDelete(id);
   return result;
 };
 
-const getNextSchedule=async(id:string)=>{
-const tour =await Tour.findById(id);
-const nextSchedule= tour?.getNextNearestStartDateEnd();
+const getNextSchedule = async (id: string) => {
+  const tour = await Tour.findById(id);
+  const nextSchedule = tour?.getNextNearestStartDateEnd();
 
-return{
-  tour,
-  nextSchedule
-}
-
-}
+  return {
+    tour,
+    nextSchedule,
+  };
+};
 
 export const tourService = {
   createTour,
@@ -48,5 +47,5 @@ export const tourService = {
   singleTour,
   updateTour,
   deleteTour,
-  getNextSchedule
+  getNextSchedule,
 };

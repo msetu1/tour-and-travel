@@ -6,7 +6,7 @@ import { Booking } from './booking.model';
 // create booking
 const createBooking = async (playLoad: IBooking): Promise<IBooking> => {
   const session = await mongoose.startSession();
-  session.startTransaction()
+  session.startTransaction();
   try {
     const { tour, bookingSlots } = playLoad;
     const requiredTour = await Tour.findById(tour);
