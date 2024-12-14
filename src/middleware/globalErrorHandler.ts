@@ -18,7 +18,7 @@ const globalErrorHandler = (
 ) => {
   if (err.name && err.name === 'ZodError') {
     handleZodError(err, res);
-  } 
+  }
   // mongoose error
   else if (err instanceof mongoose.Error.CastError) {
     handleCastError(err, res);
