@@ -9,7 +9,6 @@ const tourSchema = new Schema<ITour, TTourModel, ITourMethods>(
       trim: true,
       maxlength: [40, 'A tour name must have less or equal to 40 characters'],
       minlength: [5, 'A tour name must have more or equal to 5 characters'],
-      unique: true,
     },
     durationHours: {
       type: Number,

@@ -1,3 +1,4 @@
+import QueryBuilder from '../../builder/queryBuilder';
 import { ITour } from './tour.interface';
 import { Tour } from './tour.model';
 
@@ -9,25 +10,15 @@ const createTour = async (playLoad: ITour) => {
 
 // all tour
 const allTour = async (query: Record<string, unknown>) => {
-  console.log(query);
-
-  const queryObj = { ...query };
-  const excludingImportant = ['searchTerm'];
-  excludingImportant.forEach((key) => delete queryObj[key]);
-
-  const searchTerm = query?.searchTerm || '';
-
-  // "name","startLocation","location"
   const searchable = ['name', 'startLocation', 'location'];
+  const tours = new QueryBuilder(Tour.find(), query)
+    .search(searchable)
+    .filter()
+    .sort()
+    .paginate()
+    .select();
 
-  const searchQuery = Tour.find({
-    $or: searchable.map((field) => ({
-      [field]: { $regex: searchTerm, $options: 'i' },
-    })),
-  });
-
-  const result = await searchQuery.find(queryObj);
-
+  const result = await tours?.modelQuery;
   return result;
 };
 
