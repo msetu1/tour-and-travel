@@ -11,14 +11,11 @@ const userSchema = new Schema<IUser>(
       minlength: [3, 'Name must be at least 3 characters long'], // Minimum length validation
       maxlength: [50, 'Name must not exceed 50 characters'], // Maximum length validation
     },
-    // age: {
-    //   type: Number,
-    //   required: [true, 'Age is required'],
-    //   min: [18, 'Age must be at least 18'], // Minimum value
-    //   max: [100, 'Age must not exceed 100'], // Maximum value
-    // },
     age: {
       type: Number,
+      required: [true, 'Age is required'],
+      min: [18, 'Age must be at least 18'], // Minimum value
+      max: [100, 'Age must not exceed 100'], // Maximum value
     },
     email: {
       type: String,
@@ -43,10 +40,9 @@ const userSchema = new Schema<IUser>(
     userStatus: {
       type: String,
       enum: {
-        values: ['active', 'isActive'],
-        message: "User status must be 'active' or 'isActive'",
+        values: ['active', 'inActive'],
+        message: "User status must be 'active' or 'inActive'",
       },
-      required: [true, 'User status is required'],
     },
   },
   {

@@ -1,9 +1,9 @@
 export interface IUser {
   name: string;
-  age?: number;
+  age: number;
   email: string;
   password: string;
   photo?: string | null;
   role: 'user' | 'admin';
-  userStatus: 'active' | 'isActive';
+  userStatus: 'active' | 'inActive';
 }

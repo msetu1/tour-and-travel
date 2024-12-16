@@ -1,12 +1,13 @@
 import express, { NextFunction, Request, Response } from 'express';
 import { UserController } from './user.controller';
 import { UserValidation } from './user.validate';
+import { Auth } from '../../middleware/auth';
 
 const router = express.Router();
 
 //create user
 router.post(
-  '/create-user',
+  '/create-admin',
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const parsedBody = await UserValidation.userValidateSchema.parseAsync(
@@ -31,6 +32,6 @@ router.put('/:id', UserController.updateUser);
 router.delete('/:id', UserController.deleteUser);
 
 // All users
-router.get('/', UserController.allUsers);
+router.get('/', Auth('admin', 'user'), UserController.allUsers);
 
 export const UserRoute = router;
