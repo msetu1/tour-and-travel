@@ -7,8 +7,10 @@ const userValidateSchema = z.object({
   age: z
     .number()
     .min(18, { message: 'Age must be at least 18' })
-    .max(100, { message: 'Age must not exceed 100' }),
+    .max(100, { message: 'Age must not exceed 100' })
+    .optional(),
   email: z.string().email('Please enter a valid email address'),
+  password: z.string({ required_error: 'Password is required' }),
   photo: z.string().min(1, { message: 'Photo is required' }),
 });
 

@@ -5,6 +5,7 @@ import { TourRoute } from './module/tour/tour.route';
 import globalErrorHandler from './middleware/globalErrorHandler';
 import { BookingRoute } from './module/booking/booking.route';
 import notFound from './middleware/notFound';
+import { AuthRoute } from './auth/auth.route';
 const app: Application = express();
 
 // parser
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use(cors());
 
 // application routes
+app.use('/api/auth', AuthRoute);
 app.use('/api/user', UserRoute);
 app.use('/api/tour', TourRoute);
 app.use('/api/booking', BookingRoute);
