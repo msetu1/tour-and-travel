@@ -5,7 +5,7 @@ import httpStatusCodes from 'http-status-codes';
 export const handleZodError = (err: any, res: Response) => {
   const issues = err.issues.map((item: any) => {
     return {
-      path: item.path.json(' > '),
+      path: item.path.join(' > '),
       message: item.message,
     };
   });
